@@ -25,8 +25,8 @@
         style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textOn="@string/sur_name"
-        android:textOff="@string/sur_name"
+        android:textOn="@string/sur_name_up"
+        android:textOff="@string/sur_name_down"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toStartOf="@+id/height_value"
         app:layout_constraintStart_toEndOf="@+id/first_name"
@@ -77,6 +77,10 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
 
         android:id="@+id/add_person_button"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_baseline_add_circle_24"
+        app:tint="@color/white"
+        app:backgroundTint="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

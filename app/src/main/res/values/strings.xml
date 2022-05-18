@@ -6,7 +6,8 @@
     <string name="edit_fragment_title">Edit Person</string>
     <string name="first_name_up">First Name ▲</string>
     <string name="first_name_down">First Name ▼</string>
-    <string name="sur_name">Sur Name</string>
+    <string name="sur_name_up">Sur Name ▲</string>
+    <string name="sur_name_down">Sur Name ▼</string>
     <string name="age">Age</string>
     <string name="weight">Weight</string>
     <string name="age_value">Age</string>

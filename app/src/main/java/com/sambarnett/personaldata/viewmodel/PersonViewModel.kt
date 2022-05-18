@@ -10,8 +10,9 @@ class PersonViewModel(private val personDao: PersonDao) : ViewModel() {
 
 
     val allPersonsASC: LiveData<List<Person>> = personDao.getPersonsASC().asLiveData()
-
     val allPersonsDESC: LiveData<List<Person>> = personDao.getPersonsDESC().asLiveData()
+    val allPersonsSurNameASC: LiveData<List<Person>> = personDao.getPersonsSurNameASC().asLiveData()
+    val allPersonsSurNameDESC: LiveData<List<Person>> = personDao.getPersonsSurNameASC().asLiveData()
 
 
     /**

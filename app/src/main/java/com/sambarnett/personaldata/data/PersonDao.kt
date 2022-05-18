@@ -11,11 +11,17 @@ interface PersonDao {
     @Query("SELECT * FROM personInfo WHERE id = :id")
     fun getPerson(id: Int) : Flow<Person>
     //Query to get list of people for main fragment
-    @Query("SELECT * FROM personInfo ORDER BY surName ASC")
+    @Query("SELECT * FROM personInfo ORDER BY firstName ASC")
     fun getPersonsASC() : Flow<List<Person>>
 
-    @Query("SELECT * FROM personInfo ORDER BY surName DESC")
+    @Query("SELECT * FROM personInfo ORDER BY firstName DESC")
     fun getPersonsDESC() : Flow<List<Person>>
+
+    @Query("SELECT * FROM personInfo ORDER BY surName ASC")
+    fun getPersonsSurNameASC() : Flow<List<Person>>
+
+    @Query("SELECT * FROM personInfo ORDER BY surName DESC")
+    fun getPersonsSurNameDESC() : Flow<List<Person>>
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(person: Person)

@@ -80,6 +80,19 @@ class PersonListFragment : Fragment() {
             }
         }
 
+        binding.surName.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                viewModel.allPersonsSurNameASC.observe(this.viewLifecycleOwner) { persons ->
+                    persons.let { adapter.submitList(it) }
+                }
+            } else {
+                viewModel.allPersonsSurNameDESC.observe(this.viewLifecycleOwner)
+                { persons -> persons.let { adapter.submitList(it) } }
+            }
+        }
+
+
+
         binding.addPersonButton.setOnClickListener {
             val action =
                 PersonListFragmentDirections.actionPersonListFragmentToAddPersonFragment("HI") // add string of fragment title
