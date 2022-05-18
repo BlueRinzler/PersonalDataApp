@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="ListView" parent="Widget.MaterialComponents.TextView" >
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_height">58dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceBody1</item>
+    </style>
+
+    <style name="DetailsView" parent="Widget.MaterialComponents.TextView" >
+        <item name="android:textSize">30dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body2</item>
+
+    </style>
+
+
+
+
+</resources>

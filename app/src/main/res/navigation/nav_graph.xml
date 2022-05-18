@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/personListFragment">
+
+    <fragment
+        android:id="@+id/personListFragment"
+        android:name="com.sambarnett.personaldata.PersonListFragment"
+        android:label="person_list_fragment"
+        tools:layout="@layout/person_list_fragment" >
+        <action
+            android:id="@+id/action_personListFragment_to_addPersonFragment"
+            app:destination="@id/addPersonFragment" />
+        <action
+            android:id="@+id/action_personListFragment_to_personDetailsFragment"
+            app:destination="@id/personDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPersonFragment"
+        android:name="com.sambarnett.personaldata.AddPersonFragment"
+        android:label="fragment_add_person"
+        tools:layout="@layout/fragment_add_person" >
+        <action
+            android:id="@+id/action_addPersonFragment_to_personListFragment"
+            app:destination="@id/personListFragment" />
+        <argument android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="person_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
+    <fragment
+        android:id="@+id/personDetailsFragment"
+        android:name="com.sambarnett.personaldata.PersonDetailsFragment"
+        android:label="fragment_person_details"
+        tools:layout="@layout/fragment_person_details" >
+        <action
+            android:id="@+id/action_personDetailsFragment_to_addPersonFragment"
+            app:destination="@id/addPersonFragment" />
+        <argument
+            android:name="person_id"
+            app:argType="integer" />
+    </fragment>
+</navigation>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="12dp"
+        tools:context=".AddPersonFragment">
+
+        <!-- TextInput edit text for the first name -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/person_first_name_label"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="@string/first_name_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/first_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textAutoComplete|textCapWords" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- TextInput edit text for the sur name -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/person_sur_name_label"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="@string/sur_name_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/person_first_name_label">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/sur_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textAutoComplete|textCapWords"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!-- TextInput edit text for the age -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/person_age_label"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="@string/age_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/person_sur_name_label">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/age_value"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!-- TextInput edit text for the age -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/person_height_label"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="@string/height_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/person_age_label">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/height_value"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- TextInput edit text for the weight -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/person_weight_label"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="@string/weight_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/person_height_label">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/weight_value"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- TextInput edit text for the eye color -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/person_eye_color_label"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="@string/eye_color_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/person_weight_label">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/eye_color"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textAutoComplete|textCapWords" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/save_action"
+            android:drawableEnd="@drawable/person_add"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="@string/save_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/person_eye_color_label" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
