@@ -1,4 +1,4 @@
-package com.sambarnett.personaldata
+package com.sambarnett.personaldata.PersonAddView
 
 import android.content.Context
 import android.os.Bundle
@@ -13,8 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.sambarnett.personaldata.data.Person
 import com.sambarnett.personaldata.databinding.FragmentAddPersonBinding
-import com.sambarnett.personaldata.viewmodel.PersonViewModel
-import com.sambarnett.personaldata.viewmodel.PersonViewModelFactory
+import com.sambarnett.personaldata.PersonApplication
 
 
 /**
@@ -22,10 +21,10 @@ Fragment to add or update personal information
  */
 class AddPersonFragment : Fragment() {
 
-    private val navigationArgs: PersonDetailsFragmentArgs by navArgs()
+    private val navigationArgs: AddPersonFragmentArgs by navArgs()
 
-    private val viewModel: PersonViewModel by activityViewModels {
-        PersonViewModelFactory(
+    private val viewModel: PersonAddViewModel by activityViewModels {
+        PersonAddViewModelFactory(
             (activity?.application as PersonApplication).database.personDao()
         )
     }

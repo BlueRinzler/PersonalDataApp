@@ -1,4 +1,4 @@
-package com.sambarnett.personaldata
+package com.sambarnett.personaldata.PersonDetailsView
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.sambarnett.personaldata.PersonApplication
+import com.sambarnett.personaldata.R
 import com.sambarnett.personaldata.data.Person
 import com.sambarnett.personaldata.databinding.FragmentPersonDetailsBinding
-import com.sambarnett.personaldata.viewmodel.PersonViewModel
-import com.sambarnett.personaldata.viewmodel.PersonViewModelFactory
 
 
 /**
@@ -19,8 +19,8 @@ import com.sambarnett.personaldata.viewmodel.PersonViewModelFactory
  */
 class PersonDetailsFragment : Fragment() {
 
-    private val viewModel: PersonViewModel by activityViewModels {
-        PersonViewModelFactory(
+    private val viewModel: PersonDetailsViewModel by activityViewModels {
+        PersonDetailsViewModelFactory(
             (activity?.application as PersonApplication).database.personDao()
         )
     }
@@ -94,10 +94,6 @@ class PersonDetailsFragment : Fragment() {
         )
         this.findNavController().navigate(action)
     }
-
-
-
-
 
     /**
      * Called when fragment is destroyed.

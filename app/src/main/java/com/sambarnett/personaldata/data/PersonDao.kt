@@ -11,6 +11,10 @@ interface PersonDao {
     @Query("SELECT * FROM personInfo WHERE id = :id")
     fun getPerson(id: Int) : Flow<Person>
     //Query to get list of people for main fragment
+    //Query to get list of people for main fragment
+    @Query("SELECT * FROM personInfo")
+    fun getPersons() : Flow<List<Person>>
+
     @Query("SELECT * FROM personInfo ORDER BY firstName ASC")
     fun getPersonsASC() : Flow<List<Person>>
 

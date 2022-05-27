@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    tools:context=".PersonListFragment">
+    tools:context=".PersonListView.PersonListFragment">
 
     <!--Headers for Person data:  First Name, Sur Name , Age, Weight    -->
     <ToggleButton
@@ -28,17 +28,17 @@
         android:textOn="@string/sur_name_up"
         android:textOff="@string/sur_name_down"
         android:background="@android:color/transparent"
-        app:layout_constraintEnd_toStartOf="@+id/height_value"
+        app:layout_constraintEnd_toStartOf="@+id/age_value"
         app:layout_constraintStart_toEndOf="@+id/first_name"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ToggleButton
-        android:id="@+id/height_value"
+        android:id="@+id/age_value"
         style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:textOff="@string/height_value"
+        android:textOff="@string/age_value"
         android:textOn="@string/height_value"
         app:layout_constraintEnd_toStartOf="@+id/weight_value"
         app:layout_constraintStart_toEndOf="@+id/sur_name"
@@ -52,7 +52,7 @@
         android:textOn="@string/weight"
         android:textOff="@string/weight"
         android:background="@android:color/transparent"
-        app:layout_constraintStart_toEndOf="@+id/height_value"
+        app:layout_constraintStart_toEndOf="@+id/age_value"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -85,7 +85,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
 
 
 

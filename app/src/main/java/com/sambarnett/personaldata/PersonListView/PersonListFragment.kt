@@ -1,18 +1,16 @@
-package com.sambarnett.personaldata
+package com.sambarnett.personaldata.PersonListView
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ToggleButton
 import androidx.fragment.app.activityViewModels
 import com.sambarnett.personaldata.adapter.PersonListAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sambarnett.personaldata.PersonApplication
 import com.sambarnett.personaldata.databinding.PersonListFragmentBinding
-import com.sambarnett.personaldata.viewmodel.PersonViewModel
-import com.sambarnett.personaldata.viewmodel.PersonViewModelFactory
 
 
 /**
@@ -26,8 +24,8 @@ class PersonListFragment : Fragment() {
      */
     private var _binding: PersonListFragmentBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: PersonViewModel by activityViewModels {
-        PersonViewModelFactory(
+    private val viewModel: PersonListViewModel by activityViewModels {
+        PersonListViewModelFactory(
             (activity?.application as PersonApplication).database.personDao()
         )
     }
@@ -59,7 +57,7 @@ class PersonListFragment : Fragment() {
         binding.recyclerView.adapter = adapter
 
         //Initial view that is created.
-        viewModel.allPersonsASC.observe(this.viewLifecycleOwner) { persons ->
+        viewModel.allPersons.observe(this.viewLifecycleOwner) { persons ->
             persons.let { adapter.submitList(it) }
         }
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
@@ -71,22 +69,22 @@ class PersonListFragment : Fragment() {
         //Need to put this into callable function, doesn't preserve if the allPersonsDESC is used
         binding.firstName.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                viewModel.allPersonsASC.observe(this.viewLifecycleOwner) { persons ->
+                viewModel.allPersons.observe(this.viewLifecycleOwner) { persons ->
                     persons.let { adapter.submitList(it) }
                 }
             } else {
-                viewModel.allPersonsDESC.observe(this.viewLifecycleOwner)
+                viewModel.allPersons.observe(this.viewLifecycleOwner)
                 { persons -> persons.let { adapter.submitList(it) } }
             }
         }
 
         binding.surName.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                viewModel.allPersonsSurNameASC.observe(this.viewLifecycleOwner) { persons ->
+                viewModel.allPersons.observe(this.viewLifecycleOwner) { persons ->
                     persons.let { adapter.submitList(it) }
                 }
             } else {
-                viewModel.allPersonsSurNameDESC.observe(this.viewLifecycleOwner)
+                viewModel.allPersons.observe(this.viewLifecycleOwner)
                 { persons -> persons.let { adapter.submitList(it) } }
             }
         }
@@ -113,11 +111,11 @@ class PersonListFragment : Fragment() {
         binding.recyclerView.adapter = adapter
         binding.firstName.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                viewModel.allPersonsASC.observe(this.viewLifecycleOwner) { persons ->
+                viewModel.allPersons.observe(this.viewLifecycleOwner) { persons ->
                     persons.let { adapter.submitList(it) }
                 }
             } else {
-                viewModel.allPersonsDESC.observe(this.viewLifecycleOwner)
+                viewModel.allPersons.observe(this.viewLifecycleOwner)
                 { persons -> persons.let { adapter.submitList(it) } }
             }
         }
