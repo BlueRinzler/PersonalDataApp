@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="12dp"
-        tools:context=".PersonAddView.AddPersonFragment">
+        tools:context=".personAddView.AddPersonFragment">
 
         <!-- TextInput edit text for the first name -->
         <com.google.android.material.textfield.TextInputLayout

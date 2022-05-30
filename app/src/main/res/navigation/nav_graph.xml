@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/personListFragment"
-        android:name="com.sambarnett.personaldata.PersonListView.PersonListFragment"
+        android:name="com.sambarnett.personaldata.personListView.PersonListFragment"
         android:label="person_list_fragment"
         tools:layout="@layout/person_list_fragment" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/addPersonFragment"
-        android:name="com.sambarnett.personaldata.PersonAddView.AddPersonFragment"
+        android:name="com.sambarnett.personaldata.personAddView.AddPersonFragment"
         android:label="fragment_add_person"
         tools:layout="@layout/fragment_add_person" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/personDetailsFragment"
-        android:name="com.sambarnett.personaldata.PersonDetailsView.PersonDetailsFragment"
+        android:name="com.sambarnett.personaldata.personDetailsView.PersonDetailsFragment"
         android:label="fragment_person_details"
         tools:layout="@layout/fragment_person_details" >
         <action

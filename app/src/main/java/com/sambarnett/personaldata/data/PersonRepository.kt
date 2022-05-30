@@ -1,11 +1,13 @@
 package com.sambarnett.personaldata.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 
 class PersonRepository(private val personDao: PersonDao) {
 
     val allPersons: LiveData<List<Person>> = personDao.getPersons().asLiveData()
+    val allPersonsDESC: LiveData<List<Person>> = personDao.getPersonsDESC().asLiveData()
 
     suspend fun insertPerson(person: Person) {
         personDao.insert(person)
@@ -28,6 +30,7 @@ class PersonRepository(private val personDao: PersonDao) {
             personHeight = personHeight.toDouble(),
             personWeight = personWeight.toDouble(),
             personEyeColor = personEyeColor
+
         )
     }
     /**

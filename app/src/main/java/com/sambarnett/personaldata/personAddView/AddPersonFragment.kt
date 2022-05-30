@@ -1,4 +1,4 @@
-package com.sambarnett.personaldata.PersonAddView
+package com.sambarnett.personaldata.personAddView
 
 import android.content.Context
 import android.os.Bundle
@@ -131,6 +131,18 @@ class AddPersonFragment : Fragment() {
             binding.eyeColor.text.toString()
         )
     }
+//    private fun updateErrorFirstName(person: Person) {
+//        binding.apply {
+//            firstName.setError("wrong name")
+//        }
+//    }
+//
+//    private fun firstNameValid(): Boolean{
+//
+//    }
+
+
+
 
 
     /**

@@ -1,4 +1,4 @@
-package com.sambarnett.personaldata.PersonListView
+package com.sambarnett.personaldata.personListView
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sambarnett.personaldata.data.Person
 import com.sambarnett.personaldata.data.PersonDao
+import com.sambarnett.personaldata.data.PersonDao_Impl
 import com.sambarnett.personaldata.data.PersonRepository
 import java.lang.IllegalArgumentException
 
@@ -16,31 +17,10 @@ import java.lang.IllegalArgumentException
 
 class PersonListViewModel(private val personRepository: PersonRepository) : ViewModel() {
 
-
     val allPersons: LiveData<List<Person>> = personRepository.allPersons
+    val allPersonsDESC: LiveData<List<Person>> = personRepository.allPersonsDESC
+
 }
-
-data class PersonViewState(val persons: List<Person>)
-
-val viewState: LiveData<PersonViewState> = MutableLiveData()
-
-
-enum class SortOrder {
-    DESC, ASC,
-}
-
-
-//    fun onSortOrderChanged(sortOrder: SortOrder) {
-//        when (sortOrder) {
-//            is DESC -> {
-//                viewState.value = viewState.value.copy(
-//                    persons = PersonRepository.allPersonsDESC()
-//                )
-//            }
-//
-//        }
-//    }
-
 
 /**
  * Boilerplate code for ViewModelFactory

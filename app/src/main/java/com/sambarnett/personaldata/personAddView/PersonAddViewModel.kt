@@ -1,4 +1,4 @@
-package com.sambarnett.personaldata.PersonAddView
+package com.sambarnett.personaldata.personAddView
 
 import androidx.lifecycle.*
 import com.sambarnett.personaldata.data.Person
@@ -8,6 +8,8 @@ import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
 class PersonAddViewModel(private val personRepository: PersonRepository) : ViewModel() {
+
+    private val INPUT_FIRST_NAME = "Enter a First Name"
 
 
     /**
@@ -57,12 +59,20 @@ class PersonAddViewModel(private val personRepository: PersonRepository) : ViewM
         personFirstName: String, personSurName: String, personAge: String, personWeight: String,
         personEyeColor: String, personHeight: String
     ): Boolean {
+
         if (personFirstName.isBlank() || personSurName.isBlank() || personAge.isBlank() ||
             personHeight.isBlank() || personWeight.isBlank() || personEyeColor.isBlank()
         ) {
             return false
         }
-        return true
+        return false
+    }
+
+    fun firstNameValid(personFirstName: String): String {
+        if (personFirstName.isBlank()) {
+            return "Please Enter a First Name"
+        }
+        return personFirstName
     }
 
 

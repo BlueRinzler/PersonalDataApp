@@ -1,9 +1,6 @@
-package com.sambarnett.personaldata.PersonDetailsView
+package com.sambarnett.personaldata.personDetailsView
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.sambarnett.personaldata.data.Person
 import com.sambarnett.personaldata.data.PersonDao
 import com.sambarnett.personaldata.data.PersonRepository
@@ -11,6 +8,8 @@ import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
 class PersonDetailsViewModel(private val personRepository: PersonRepository): ViewModel() {
+
+
 
 
     /**

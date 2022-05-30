@@ -1,4 +1,4 @@
-package com.sambarnett.personaldata.PersonDetailsView
+package com.sambarnett.personaldata.personDetailsView
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,4 +1,4 @@
-package com.sambarnett.personaldata.PersonListView
+package com.sambarnett.personaldata.personListView
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -29,7 +29,6 @@ class PersonListFragment : Fragment() {
             (activity?.application as PersonApplication).database.personDao()
         )
     }
-    private var personNameASC: Boolean = true
 
     //Need to turn on viewBinding in dependencies.
     override fun onCreateView(
@@ -73,7 +72,7 @@ class PersonListFragment : Fragment() {
                     persons.let { adapter.submitList(it) }
                 }
             } else {
-                viewModel.allPersons.observe(this.viewLifecycleOwner)
+                viewModel.allPersonsDESC.observe(this.viewLifecycleOwner)
                 { persons -> persons.let { adapter.submitList(it) } }
             }
         }
@@ -90,12 +89,17 @@ class PersonListFragment : Fragment() {
         }
 
 
-
         binding.addPersonButton.setOnClickListener {
             val action =
                 PersonListFragmentDirections.actionPersonListFragmentToAddPersonFragment("HI") // add string of fragment title
             this.findNavController().navigate(action)
         }
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+
     }
 
     /**
