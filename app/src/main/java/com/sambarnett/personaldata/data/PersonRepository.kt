@@ -3,14 +3,54 @@ package com.sambarnett.personaldata.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
-class PersonRepository(private val personDao: PersonDao) {
 
-    val allPersons: LiveData<List<Person>> = personDao.getPersons().asLiveData()
-    val allPersonsDESC: LiveData<List<Person>> = personDao.getPersonsDESC().asLiveData()
+/**
+ * This repo pulls from the LocalDataSource
+ */
+class PersonRepository(
+    private val personsLocalDataSource: PersonsLocalDataSource
+) {
 
-    suspend fun insertPerson(person: Person) {
-        personDao.insert(person)
+    /**
+     * Below 2 functions get List and individual people from the LocalDataSource not as a flow
+     */
+    suspend fun getPersons(): List<Person> {
+        return personsLocalDataSource.getPersons()
+    }
+
+    suspend fun getPerson(id: Int): Person {
+        return personsLocalDataSource.getPerson(id)
+    }
+
+    /**
+     * Below 2 functions get List and individual from the LocalDataSource people as a flow
+     */
+    fun getPersonsStream(): Flow<List<Person>> {
+        return personsLocalDataSource.getPersonsStream()
+    }
+
+    fun getPersonStream(id: Int): Flow<Person> {
+        return personsLocalDataSource.getPersonStream(id)
+    }
+
+
+    suspend fun savePerson(person: Person) {
+        personsLocalDataSource.savePerson(person)
+    }
+
+    suspend fun updatePerson(person: Person) {
+        personsLocalDataSource.updatePerson(person)
+    }
+
+    suspend fun deletePerson(person: Person) {
+        personsLocalDataSource.deletePerson(person)
 
     }
 
@@ -33,6 +73,7 @@ class PersonRepository(private val personDao: PersonDao) {
 
         )
     }
+
     /**
      * Function called by updatePerson, gets the new details inputted from the user input and returns a person objects
      */
@@ -52,15 +93,4 @@ class PersonRepository(private val personDao: PersonDao) {
         )
     }
 
-    suspend fun updatePerson(person: Person) {
-        personDao.update(person)
-    }
-
-    suspend fun deletePerson(person: Person) {
-        personDao.delete(person)
-    }
-
-    fun getPerson(id: Int): LiveData<Person> {
-       return personDao.getPerson(id).asLiveData()
-    }
 }

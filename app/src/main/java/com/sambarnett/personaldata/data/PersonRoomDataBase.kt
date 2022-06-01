@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 
 @Database(entities = [Person::class], version = 1, exportSchema = false)
-abstract class PersonRoomDataBase: RoomDatabase() {
+abstract class PersonRoomDataBase : RoomDatabase() {
 
     abstract fun personDao(): PersonDao
 
@@ -17,7 +17,7 @@ abstract class PersonRoomDataBase: RoomDatabase() {
         private var INSTANCE: PersonRoomDataBase? = null
 
         fun getDatabase(context: Context): PersonRoomDataBase {
-            return INSTANCE?: synchronized(this) {
+            return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     PersonRoomDataBase::class.java,
@@ -28,10 +28,7 @@ abstract class PersonRoomDataBase: RoomDatabase() {
                 INSTANCE = instance
                 return instance
             }
-
         }
-
-
     }
 
 

@@ -6,11 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.sambarnett.personaldata.adapter.PersonListAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sambarnett.personaldata.PersonApplication
+import com.sambarnett.personaldata.data.Person
+import com.sambarnett.personaldata.data.PersonRepository
+import com.sambarnett.personaldata.data.Result
 import com.sambarnett.personaldata.databinding.PersonListFragmentBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 /**
@@ -24,6 +33,10 @@ class PersonListFragment : Fragment() {
      */
     private var _binding: PersonListFragmentBinding? = null
     private val binding get() = _binding!!
+
+
+    //Can't figure this out yet...
+
     private val viewModel: PersonListViewModel by activityViewModels {
         PersonListViewModelFactory(
             (activity?.application as PersonApplication).database.personDao()
@@ -54,39 +67,52 @@ class PersonListFragment : Fragment() {
             this.findNavController().navigate(action)
         }
         binding.recyclerView.adapter = adapter
-
-        //Initial view that is created.
-        viewModel.allPersons.observe(this.viewLifecycleOwner) { persons ->
-            persons.let { adapter.submitList(it) }
-        }
-        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
-
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         /**
-         * Need more onClickListeners or onCheckedListeners?
+         * I don't know if this will work..
          */
-        //Need to put this into callable function, doesn't preserve if the allPersonsDESC is used
-        binding.firstName.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                viewModel.allPersons.observe(this.viewLifecycleOwner) { persons ->
-                    persons.let { adapter.submitList(it) }
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.allPersons().collect {
+                    adapter.submitList(it)
                 }
-            } else {
-                viewModel.allPersonsDESC.observe(this.viewLifecycleOwner)
-                { persons -> persons.let { adapter.submitList(it) } }
             }
         }
 
-        binding.surName.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                viewModel.allPersons.observe(this.viewLifecycleOwner) { persons ->
-                    persons.let { adapter.submitList(it) }
-                }
-            } else {
-                viewModel.allPersons.observe(this.viewLifecycleOwner)
-                { persons -> persons.let { adapter.submitList(it) } }
-            }
-        }
+//
+//        //Initial view that is created.
+//        viewModel.allPersons.observe(this.viewLifecycleOwner) { persons ->
+//            persons.let { adapter.submitList(it) }
+//        }
+//
+//
+//
+//        /**
+//         * Need more onClickListeners or onCheckedListeners?
+//         */
+//        //Need to put this into callable function, doesn't preserve if the allPersonsDESC is used
+//        binding.firstName.setOnCheckedChangeListener { _, isChecked ->
+//            if (isChecked) {
+//                viewModel.allPersons.observe(this.viewLifecycleOwner) { persons ->
+//                    persons.let { adapter.submitList(it) }
+//                }
+//            } else {
+//                viewModel.allPersonsDESC.observe(this.viewLifecycleOwner)
+//                { persons -> persons.let { adapter.submitList(it) } }
+//            }
+//        }
+//
+//        binding.surName.setOnCheckedChangeListener { _, isChecked ->
+//            if (isChecked) {
+//                viewModel.allPersons.observe(this.viewLifecycleOwner) { persons ->
+//                    persons.let { adapter.submitList(it) }
+//                }
+//            } else {
+//                viewModel.allPersons.observe(this.viewLifecycleOwner)
+//                { persons -> persons.let { adapter.submitList(it) } }
+//            }
+//        }
 
 
         binding.addPersonButton.setOnClickListener {
@@ -101,31 +127,32 @@ class PersonListFragment : Fragment() {
         super.onResume()
 
     }
-
-    /**
-     * Working - ish  code to set the firstname textview as a button to control if the list is DESC or ASC
-     * As of right now this function is called in onViewCreated, but when navigating back after the else portion is called, the view doesn't populate
-     */
-    private fun toggleFirstName() {
-        val adapter = PersonListAdapter {
-            val action =
-                PersonListFragmentDirections.actionPersonListFragmentToPersonDetailsFragment(it.id)
-            this.findNavController().navigate(action)
-        }
-        binding.recyclerView.adapter = adapter
-        binding.firstName.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                viewModel.allPersons.observe(this.viewLifecycleOwner) { persons ->
-                    persons.let { adapter.submitList(it) }
-                }
-            } else {
-                viewModel.allPersons.observe(this.viewLifecycleOwner)
-                { persons -> persons.let { adapter.submitList(it) } }
-            }
-        }
-    }
-
 }
+
+/**
+ * Working - ish  code to set the firstname textview as a button to control if the list is DESC or ASC
+ * As of right now this function is called in onViewCreated, but when navigating back after the else portion is called, the view doesn't populate
+ */
+//    private fun toggleFirstName() {
+//        val adapter = PersonListAdapter {
+//            val action =
+//                PersonListFragmentDirections.actionPersonListFragmentToPersonDetailsFragment(it.id)
+//            this.findNavController().navigate(action)
+//        }
+//        binding.recyclerView.adapter = adapter
+//        binding.firstName.setOnCheckedChangeListener { _, isChecked ->
+//            if (isChecked) {
+//                viewModel.allPersons.observe(this.viewLifecycleOwner) { persons ->
+//                    persons.let { adapter.submitList(it) }
+//                }
+//            } else {
+//                viewModel.allPersons.observe(this.viewLifecycleOwner)
+//                { persons -> persons.let { adapter.submitList(it) } }
+//            }
+//        }
+//    }
+//
+//}
 
 
 

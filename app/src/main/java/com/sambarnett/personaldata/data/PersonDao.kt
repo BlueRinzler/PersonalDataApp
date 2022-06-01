@@ -7,25 +7,23 @@ import kotlinx.coroutines.flow.Flow
 interface PersonDao {
 
 
-    //Query to get individual people for second fragment
+    //Query to get individual people as Flow
     @Query("SELECT * FROM personInfo WHERE id = :id")
-    fun getPerson(id: Int) : Flow<Person>
-    //Query to get list of people for main fragment
-    //Query to get list of people for main fragment
+    fun observePersonByID(id: Int) : Flow<Person>
+
+    //Query to get list of people Flow
     @Query("SELECT * FROM personInfo")
-    fun getPersons() : Flow<List<Person>>
+    fun observePersons() : Flow<List<Person>>
 
-    @Query("SELECT * FROM personInfo ORDER BY firstName ASC")
-    fun getPersonsASC() : Flow<List<Person>>
+    //Query to get list of people Flow
+    @Query("SELECT * FROM personInfo")
+    suspend fun getPersons(): List<Person>
 
-    @Query("SELECT * FROM personInfo ORDER BY firstName DESC")
-    fun getPersonsDESC() : Flow<List<Person>>
+    //Query to get individual people as Flow
+    @Query("SELECT * FROM personInfo WHERE id = :id")
+    suspend fun getPersonByID(id: Int): Person?
 
-    @Query("SELECT * FROM personInfo ORDER BY surName ASC")
-    fun getPersonsSurNameASC() : Flow<List<Person>>
 
-    @Query("SELECT * FROM personInfo ORDER BY surName DESC")
-    fun getPersonsSurNameDESC() : Flow<List<Person>>
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(person: Person)
@@ -35,6 +33,11 @@ interface PersonDao {
 
     @Delete
     suspend fun delete(person: Person)
+    /**
+     * Delete all people
+     */
+    @Query("DELETE FROM personInfo")
+    suspend fun deletePersons()
 
 
 }
