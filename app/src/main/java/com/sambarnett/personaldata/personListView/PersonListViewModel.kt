@@ -2,46 +2,40 @@ package com.sambarnett.personaldata.personListView
 
 import androidx.lifecycle.*
 import com.sambarnett.personaldata.data.Person
-import com.sambarnett.personaldata.data.PersonDao
-import com.sambarnett.personaldata.data.PersonRepository
+import com.sambarnett.personaldata.data.PersonRepositoryImpl
 
-import com.sambarnett.personaldata.data.Result
-import com.sambarnett.personaldata.personAddView.PersonAddViewModel
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
 
 
-sealed interface PersonUIState {
-    data class Success(val person: Person): PersonUIState {
-        object Error: PersonUIState
-    }
-}
-
 /**
  * for UI State
  */
-data class PersonListUIState(val personState: PersonUIState)
-
-
+//data class PersonListUIState(val personState: PersonUIState)
 
 
 /**
  * ViewModel to show to List of Persons
  */
 
-class PersonListViewModel(private val personRepository: PersonRepository) : ViewModel() {
-
+class PersonListViewModel(private val personRepositoryImpl: PersonRepositoryImpl) : ViewModel() {
 
     /**
      * Function to pull in people from repo
      */
+    fun allPersons(): Flow<List<Person>> = personRepositoryImpl.getPersonsStream()
 
-    fun allPersons(): Flow<List<Person>> = personRepository.getPersonsStream()
+    init {
+        viewModelScope.launch {
+            personRepositoryImpl.getPersonsStream().collectLatest {
 
 
+            }
+        }
 
-
+    }
 
 
 
@@ -50,11 +44,11 @@ class PersonListViewModel(private val personRepository: PersonRepository) : View
 /**
  * Boilerplate code for ViewModelFactory
  */
-class PersonListViewModelFactory(private val personRepository: PersonRepository) : ViewModelProvider.Factory {
+class PersonListViewModelFactory(private val personRepositoryImpl: PersonRepositoryImpl) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PersonListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return PersonListViewModel(personRepository) as T
+            return PersonListViewModel(personRepositoryImpl) as T
 
         }
         throw IllegalArgumentException("Unknown ViewModel Class")

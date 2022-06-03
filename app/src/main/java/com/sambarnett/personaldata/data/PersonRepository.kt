@@ -1,78 +1,31 @@
 package com.sambarnett.personaldata.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
-import java.lang.Exception
 
+interface PersonRepository {
 
-/**
- * This repo pulls from the LocalDataSource
- */
-class PersonRepository(
-    private val personsLocalDataSource: PersonsLocalDataSource
-) {
+    suspend fun getPersons(): List<Person>
 
-    /**
-     * Below 2 functions get List and individual people from the LocalDataSource not as a flow
-     */
-    suspend fun getPersons(): List<Person> {
-        return personsLocalDataSource.getPersons()
-    }
+    suspend fun getPerson(id: Int): Person
 
-    suspend fun getPerson(id: Int): Person {
-        return personsLocalDataSource.getPerson(id)
-    }
+    fun getPersonsStream(): Flow<List<Person>>
 
-    /**
-     * Below 2 functions get List and individual from the LocalDataSource people as a flow
-     */
-    fun getPersonsStream(): Flow<List<Person>> {
-        return personsLocalDataSource.getPersonsStream()
-    }
+    fun getPersonStream(id: Int): Flow<Person>
 
-    fun getPersonStream(id: Int): Flow<Person> {
-        return personsLocalDataSource.getPersonStream(id)
-    }
+    suspend fun savePerson(person: Person)
 
+    suspend fun updatePerson(person: Person)
 
-    suspend fun savePerson(person: Person) {
-        personsLocalDataSource.savePerson(person)
-    }
-
-    suspend fun updatePerson(person: Person) {
-        personsLocalDataSource.updatePerson(person)
-    }
-
-    suspend fun deletePerson(person: Person) {
-        personsLocalDataSource.deletePerson(person)
-
-    }
-
-
-    /**
-     * Function used by addNewPerson, retrieves user inputted data and returns a person object
-     */
+    suspend fun deletePerson(person: Person)
 
     fun getPersonEntry(
-        personFirstName: String, personSurName: String, personAge: String, personHeight: String,
-        personWeight: String, personEyeColor: String
-    ): Person {
-        return Person(
-            personFirstName = personFirstName,
-            personSurName = personSurName,
-            personAge = personAge.toInt(),
-            personHeight = personHeight.toDouble(),
-            personWeight = personWeight.toDouble(),
-            personEyeColor = personEyeColor
-
-        )
-    }
+        personFirstName: String,
+        personSurName: String,
+        personAge: String,
+        personHeight: String,
+        personWeight: String,
+        personEyeColor: String
+    ): Person
 
     /**
      * Function called by updatePerson, gets the new details inputted from the user input and returns a person objects
@@ -81,16 +34,7 @@ class PersonRepository(
         personId: Int, personFirstName: String, personSurName: String,
         personAge: String, personHeight: String,
         personWeight: String, personEyeColor: String
-    ): Person {
-        return Person(
-            id = personId,
-            personFirstName = personFirstName,
-            personSurName = personSurName,
-            personAge = personAge.toInt(),
-            personHeight = personHeight.toDouble(),
-            personWeight = personWeight.toDouble(),
-            personEyeColor = personEyeColor
-        )
-    }
+    ): Person
+
 
 }

@@ -43,7 +43,7 @@
         android:layout_margin="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/person_age"
-        tools:text="5'10''" />
+        tools:text="177.30" />
 
     <TextView
         android:id="@+id/person_eye_color"

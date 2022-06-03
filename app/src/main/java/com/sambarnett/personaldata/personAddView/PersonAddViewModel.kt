@@ -2,21 +2,18 @@ package com.sambarnett.personaldata.personAddView
 
 import androidx.lifecycle.*
 import com.sambarnett.personaldata.data.Person
-import com.sambarnett.personaldata.data.PersonDao
-import com.sambarnett.personaldata.data.PersonRepository
+import com.sambarnett.personaldata.data.PersonRepositoryImpl
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
-class PersonAddViewModel(private val personRepository: PersonRepository) : ViewModel() {
-
-    private val INPUT_FIRST_NAME = "Enter a First Name"
-
+class PersonAddViewModel(private val personRepositoryImpl: PersonRepositoryImpl) : ViewModel() {
 
     /**
      * Function is used by PersonDetailsFragment to give all the proper info for a single Person
      */
-    fun retrievePerson(id: Int): LiveData<Person> {
-        return personRepository.getPerson(id)
+    fun retrievePerson(id: Int): Flow<Person> {
+        return personRepositoryImpl.getPersonStream(id)
 
     }
 
@@ -26,7 +23,7 @@ class PersonAddViewModel(private val personRepository: PersonRepository) : ViewM
      */
     private fun insertPerson(person: Person) {
         viewModelScope.launch {
-            personRepository.insertPerson(person)
+            personRepositoryImpl.savePerson(person)
         }
     }
 
@@ -39,7 +36,7 @@ class PersonAddViewModel(private val personRepository: PersonRepository) : ViewM
         personWeight: String, personEyeColor: String
     ) {
         //calling getPersonEntry
-        val newPerson = personRepository.getPersonEntry(
+        val newPerson = personRepositoryImpl.getPersonEntry(
             personFirstName,
             personSurName,
             personAge,
@@ -81,7 +78,7 @@ class PersonAddViewModel(private val personRepository: PersonRepository) : ViewM
      */
     private fun updatePerson(person: Person) {
         viewModelScope.launch {
-            personRepository.updatePerson(person)
+            personRepositoryImpl.updatePerson(person)
         }
     }
 
@@ -94,7 +91,7 @@ class PersonAddViewModel(private val personRepository: PersonRepository) : ViewM
         personAge: String, personHeight: String,
         personWeight: String, personEyeColor: String
     ) {
-        val updatedPerson = personRepository.getUpdatedPerson(
+        val updatedPerson = personRepositoryImpl.getUpdatedPerson(
             personId,
             personFirstName,
             personSurName,
@@ -112,12 +109,13 @@ class PersonAddViewModel(private val personRepository: PersonRepository) : ViewM
 /**
  * Boilerplate code for ViewModelFactory
  */
-class PersonAddViewModelFactory(private val personDao: PersonDao) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(PersonAddViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return PersonAddViewModel(personRepository = PersonRepository(personDao)) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel Class")
-    }
-}
+//class PersonAddViewModelFactory(private val personRepositoryImpl: PersonRepositoryImpl) : ViewModelProvider.Factory {
+//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//        if (modelClass.isAssignableFrom(PersonAddViewModel::class.java)) {
+//            @Suppress("UNCHECKED_CAST")
+//            return PersonAddViewModel(personRepository = PersonRepositoryImpl(personDao)) as T
+//        }
+//        throw IllegalArgumentException("Unknown ViewModel Class")
+//    }
+//}
+

@@ -1,26 +1,24 @@
 package com.sambarnett.personaldata.personListView
 
 import android.os.Bundle
+import android.util.Log.v
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.persistableBundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.sambarnett.personaldata.adapter.PersonListAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sambarnett.personaldata.PersonApplication
-import com.sambarnett.personaldata.data.Person
-import com.sambarnett.personaldata.data.PersonRepository
-import com.sambarnett.personaldata.data.Result
 import com.sambarnett.personaldata.databinding.PersonListFragmentBinding
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * This is the first fragment displaying details for all people in the database.
@@ -35,13 +33,14 @@ class PersonListFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-    //Can't figure this out yet...
+//    //Can't figure this out yet...
+    private val viewModel: PersonListViewModel  by viewModel()
 
-    private val viewModel: PersonListViewModel by activityViewModels {
-        PersonListViewModelFactory(
-            (activity?.application as PersonApplication).database.personDao()
-        )
-    }
+//    private val viewModel: PersonListViewModel by activityViewModels {
+//        PersonListViewModelFactory(
+//            (activity?.application as PersonApplication).database.personDao()
+//        )
+//    }
 
     //Need to turn on viewBinding in dependencies.
     override fun onCreateView(
@@ -113,7 +112,6 @@ class PersonListFragment : Fragment() {
 //                { persons -> persons.let { adapter.submitList(it) } }
 //            }
 //        }
-
 
         binding.addPersonButton.setOnClickListener {
             val action =

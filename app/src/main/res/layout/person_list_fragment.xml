@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:textOff="@string/age_value"
-        android:textOn="@string/height_value"
+        android:textOn="@string/age_value"
         app:layout_constraintEnd_toStartOf="@+id/weight_value"
         app:layout_constraintStart_toEndOf="@+id/sur_name"
         app:layout_constraintTop_toTopOf="parent" />

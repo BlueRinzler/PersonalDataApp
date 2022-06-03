@@ -2,12 +2,12 @@ package com.sambarnett.personaldata.personDetailsView
 
 import androidx.lifecycle.*
 import com.sambarnett.personaldata.data.Person
-import com.sambarnett.personaldata.data.PersonDao
-import com.sambarnett.personaldata.data.PersonRepository
+import com.sambarnett.personaldata.data.PersonRepositoryImpl
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
-class PersonDetailsViewModel(private val personRepository: PersonRepository): ViewModel() {
+class PersonDetailsViewModel(private val personRepositoryImpl: PersonRepositoryImpl): ViewModel() {
 
 
 
@@ -15,8 +15,8 @@ class PersonDetailsViewModel(private val personRepository: PersonRepository): Vi
     /**
      * Function is used by PersonDetailsFragment to give all the proper info for a single Person
      */
-    fun retrievePerson(id: Int): LiveData<Person> {
-        return personRepository.getPerson(id)
+    fun retrievePerson(id: Int): Flow<Person> {
+        return personRepositoryImpl.getPersonStream(id)
 
     }
     /**
@@ -24,7 +24,7 @@ class PersonDetailsViewModel(private val personRepository: PersonRepository): Vi
      */
     fun deletePerson(person: Person) {
         viewModelScope.launch {
-            personRepository.deletePerson(person)
+            personRepositoryImpl.deletePerson(person)
         }
     }
 
@@ -33,11 +33,11 @@ class PersonDetailsViewModel(private val personRepository: PersonRepository): Vi
 /**
  * Boilerplate code for ViewModelFactory
  */
-class PersonDetailsViewModelFactory(private val personDao: PersonDao) : ViewModelProvider.Factory {
+class PersonDetailsViewModelFactory(private val personRepositoryImpl: PersonRepositoryImpl) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PersonDetailsViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return PersonDetailsViewModel(personRepository = PersonRepository(personDao)) as T
+            return PersonDetailsViewModel(personRepositoryImpl) as T
         }
         throw IllegalArgumentException("Unknown ViewModel Class")
     }

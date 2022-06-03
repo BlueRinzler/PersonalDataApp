@@ -6,12 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.sambarnett.personaldata.PersonApplication
 import com.sambarnett.personaldata.R
 import com.sambarnett.personaldata.data.Person
 import com.sambarnett.personaldata.databinding.FragmentPersonDetailsBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 /**
@@ -19,14 +26,16 @@ import com.sambarnett.personaldata.databinding.FragmentPersonDetailsBinding
  */
 class PersonDetailsFragment : Fragment() {
 
-    private val viewModel: PersonDetailsViewModel by activityViewModels {
-        PersonDetailsViewModelFactory(
-            (activity?.application as PersonApplication).database.personDao()
-        )
-    }
+    private val viewModel: PersonDetailsViewModel by viewModel()
+//    private val viewModel: PersonDetailsViewModel by activityViewModels {
+//        PersonDetailsViewModelFactory(
+//            (activity?.application as PersonApplication).database.personDao()
+//        )
+//    }
 
     //Using SafeArgs to pass the person_id as the parameter to update the fragment
     private val navigationArgs: PersonDetailsFragmentArgs by navArgs()
+
     //Creating the person value when needed
     lateinit var person: Person
 
@@ -35,13 +44,12 @@ class PersonDetailsFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentPersonDetailsBinding.inflate(inflater,container, false)
+        _binding = FragmentPersonDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -52,9 +60,17 @@ class PersonDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id = navigationArgs.personId
-        viewModel.retrievePerson(id).observe(this.viewLifecycleOwner) { selectedPerson ->
-            person = selectedPerson
-            bind(person)
+//        viewModel.retrievePerson(id).observe(this.viewLifecycleOwner) { selectedPerson ->
+//            person = selectedPerson
+//            bind(person)
+//        }
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.retrievePerson(id).collect { selectedPerson ->
+                    person = selectedPerson
+                    bind(person)
+                }
+            }
         }
 
     }
@@ -71,7 +87,7 @@ class PersonDetailsFragment : Fragment() {
             binding.personWeight.text = person.personWeight.toString()
             binding.personHeight.text = person.personHeight.toString()
             binding.personEyeColor.text = person.personEyeColor
-            deletePerson.setOnClickListener { deletePerson()  }
+            deletePerson.setOnClickListener { deletePerson() }
             editPerson.setOnClickListener { editPerson() }
         }
     }
