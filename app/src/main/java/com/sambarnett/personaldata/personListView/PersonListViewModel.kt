@@ -6,14 +6,16 @@ import com.sambarnett.personaldata.data.PersonRepositoryImpl
 
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import java.lang.IllegalArgumentException
+
 
 
 
 /**
  * for UI State
  */
-//data class PersonListUIState(val personState: PersonUIState)
+sealed class PersonListUIState {
+    data class State(val persons: List<Person>) : PersonListUIState()
+}
 
 
 /**
@@ -21,6 +23,9 @@ import java.lang.IllegalArgumentException
  */
 
 class PersonListViewModel(private val personRepositoryImpl: PersonRepositoryImpl) : ViewModel() {
+
+    private val _uiState = MutableStateFlow(PersonListUIState.State(emptyList()))
+    val uiState: StateFlow<PersonListUIState> = _uiState
 
     /**
      * Function to pull in people from repo
@@ -30,27 +35,8 @@ class PersonListViewModel(private val personRepositoryImpl: PersonRepositoryImpl
     init {
         viewModelScope.launch {
             personRepositoryImpl.getPersonsStream().collectLatest {
-
-
+                persons -> _uiState.value = PersonListUIState.State(persons)
             }
         }
-
-    }
-
-
-
-}
-
-/**
- * Boilerplate code for ViewModelFactory
- */
-class PersonListViewModelFactory(private val personRepositoryImpl: PersonRepositoryImpl) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(PersonListViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return PersonListViewModel(personRepositoryImpl) as T
-
-        }
-        throw IllegalArgumentException("Unknown ViewModel Class")
     }
 }

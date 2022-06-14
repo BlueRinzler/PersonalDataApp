@@ -3,10 +3,8 @@ package com.sambarnett.personaldata.data
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import junit.framework.TestCase
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -42,7 +40,7 @@ class DataBaseTest: TestCase() {
         val person = Person(1, "Sam", "Barnett", 26,
             192.4, 177.0, "Blue")
         dao.insert(person)
-        val persons = dao.getPersonsASC().toList()
+        val persons = dao.getPersons().toList()
         assertEquals(1, persons.size)
     }
 }

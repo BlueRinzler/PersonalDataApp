@@ -18,13 +18,13 @@ class PersonListAdapter(private val onPersonClicked: (Person) -> Unit) :
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-            PersonListAdapter.PersonViewHolder {
+            PersonViewHolder {
         return PersonViewHolder(
             PersonListPersonBinding.inflate(LayoutInflater.from(parent.context))
         )
     }
 
-    override fun onBindViewHolder(holder: PersonListAdapter.PersonViewHolder, postion: Int) {
+    override fun onBindViewHolder(holder: PersonViewHolder, postion: Int) {
         val current = getItem(postion)
         holder.itemView.setOnClickListener {
             onPersonClicked(current)

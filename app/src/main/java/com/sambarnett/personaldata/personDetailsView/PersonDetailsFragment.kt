@@ -5,14 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.sambarnett.personaldata.PersonApplication
 import com.sambarnett.personaldata.R
 import com.sambarnett.personaldata.data.Person
 import com.sambarnett.personaldata.databinding.FragmentPersonDetailsBinding
@@ -26,12 +23,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 class PersonDetailsFragment : Fragment() {
 
+    //DI to create viewModel
     private val viewModel: PersonDetailsViewModel by viewModel()
-//    private val viewModel: PersonDetailsViewModel by activityViewModels {
-//        PersonDetailsViewModelFactory(
-//            (activity?.application as PersonApplication).database.personDao()
-//        )
-//    }
 
     //Using SafeArgs to pass the person_id as the parameter to update the fragment
     private val navigationArgs: PersonDetailsFragmentArgs by navArgs()
@@ -60,10 +53,7 @@ class PersonDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id = navigationArgs.personId
-//        viewModel.retrievePerson(id).observe(this.viewLifecycleOwner) { selectedPerson ->
-//            person = selectedPerson
-//            bind(person)
-//        }
+
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.retrievePerson(id).collect { selectedPerson ->

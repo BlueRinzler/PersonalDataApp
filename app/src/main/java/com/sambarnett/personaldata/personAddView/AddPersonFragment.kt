@@ -2,13 +2,13 @@ package com.sambarnett.personaldata.personAddView
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -16,7 +16,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.sambarnett.personaldata.data.Person
 import com.sambarnett.personaldata.databinding.FragmentAddPersonBinding
-import com.sambarnett.personaldata.PersonApplication
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,17 +24,18 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 /**
 Fragment to add or update personal information
  */
+
+private val TAG: String = AddPersonFragment::class.java.simpleName
+
 class AddPersonFragment : Fragment() {
 
+    //Setting up navigation
     private val navigationArgs: AddPersonFragmentArgs by navArgs()
 
+    //DI to create viewModel
     private val viewModel: PersonAddViewModel by viewModel()
 
-    //    private val viewModel: PersonAddViewModel by activityViewModels {
-//        PersonAddViewModelFactory(
-//            (activity?.application as PersonApplication).database.personDao()
-//        )
-//    }
+    //person object created to bind to view
     lateinit var person: Person
 
     // Binding object instance corresponding to the fragment_add_person.xml layout
@@ -60,11 +60,6 @@ class AddPersonFragment : Fragment() {
         val id = navigationArgs.personId
         // if there already is an instance of this id, populate the view with that information, this is for the updatePerson portion
         if (id > 0) {
-//            viewModel.retrievePerson(id).observe(this.viewLifecycleOwner) { selectedPerson ->
-//                person = selectedPerson
-//                currentBind(person)
-//            }
-
             lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.retrievePerson(id).collect { selectedPerson ->
@@ -101,7 +96,7 @@ class AddPersonFragment : Fragment() {
      * Function used to add persons to the database, calls isPersonValid, then the viewModel to add a newPerson
      */
     private fun addNewPerson() {
-        if (isPersonValid()) {
+        if (personValid()) {
             viewModel.addNewPerson(
                 binding.firstName.text.toString(),
                 binding.surName.text.toString(),
@@ -120,7 +115,9 @@ class AddPersonFragment : Fragment() {
      * Function used to update a person in he database, calls isPersonValid, then the viewModel to update a Person
      */
     private fun updatePerson() {
-        if (isPersonValid()) {
+        Log.d(TAG, "UPDATE PERSON CALLED")
+        if (personValid()) {
+            Log.d(TAG, "updatePerson() returned true")
             viewModel.updatePerson(
                 this.navigationArgs.personId,
                 this.binding.firstName.text.toString(),
@@ -139,7 +136,9 @@ class AddPersonFragment : Fragment() {
     /**
      * Function uses the ViewModel to check if text entered by user is blank or not
      */
-    private fun isPersonValid(): Boolean {
+
+    private fun personValid(): Boolean {
+        Log.d(TAG, "isPersonValid add called")
         return viewModel.isPersonValid(
             binding.firstName.text.toString(),
             binding.surName.text.toString(),
@@ -149,16 +148,6 @@ class AddPersonFragment : Fragment() {
             binding.eyeColor.text.toString()
         )
     }
-//    private fun updateErrorFirstName(person: Person) {
-//        binding.apply {
-//            firstName.setError("wrong name")
-//        }
-//    }
-//
-//    private fun firstNameValid(): Boolean{
-//
-//    }
-
 
     /**
      * Called before fragment is destroyed.

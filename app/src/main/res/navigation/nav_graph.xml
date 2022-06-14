@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/personListFragment"
         android:name="com.sambarnett.personaldata.personListView.PersonListFragment"
-        android:label="person_list_fragment"
-        tools:layout="@layout/person_list_fragment" >
+        android:label="@string/person_list_fragment_label"
+        tools:layout="@layout/person_list_fragment">
         <action
             android:id="@+id/action_personListFragment_to_addPersonFragment"
             app:destination="@id/addPersonFragment" />
@@ -20,23 +20,24 @@
     <fragment
         android:id="@+id/addPersonFragment"
         android:name="com.sambarnett.personaldata.personAddView.AddPersonFragment"
-        android:label="fragment_add_person"
-        tools:layout="@layout/fragment_add_person" >
+        android:label="@string/add_person_fragment_label"
+        tools:layout="@layout/fragment_add_person">
         <action
             android:id="@+id/action_addPersonFragment_to_personListFragment"
             app:destination="@id/personListFragment" />
-        <argument android:name="title"
+        <argument
+            android:name="title"
             app:argType="string" />
         <argument
             android:name="person_id"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            android:defaultValue="-1"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/personDetailsFragment"
         android:name="com.sambarnett.personaldata.personDetailsView.PersonDetailsFragment"
-        android:label="fragment_person_details"
-        tools:layout="@layout/fragment_person_details" >
+        android:label="@string/person_details_fragment"
+        tools:layout="@layout/fragment_person_details">
         <action
             android:id="@+id/action_personDetailsFragment_to_addPersonFragment"
             app:destination="@id/addPersonFragment" />

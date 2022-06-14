@@ -13,8 +13,14 @@
     <string name="age_value">Age</string>
     <string name="sur_name_value">Sur Name</string>
     <string name="first_name_value">First Name</string>
-    <string name="height_value">Height</string>
+    <string name="height_value">Height </string>
     <string name="weight_value">Weight</string>
     <string name="eye_color_value">Eye Color</string>
     <string name="save_value">Save</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+
+    <string name="person_list_fragment_label">People</string>
+    <string name="add_person_fragment_label"> {title} </string>
+    <string name="person_details_fragment">Personal Details</string>
 </resources>

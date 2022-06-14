@@ -3,7 +3,7 @@
     package="com.sambarnett.personaldata">
 
     <application
-        android:name="com.sambarnett.personaldata.PersonApplication"
+        android:name="com.sambarnett.personaldata.di.PersonApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

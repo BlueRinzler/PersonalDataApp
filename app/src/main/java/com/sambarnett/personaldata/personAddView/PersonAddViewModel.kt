@@ -5,7 +5,9 @@ import com.sambarnett.personaldata.data.Person
 import com.sambarnett.personaldata.data.PersonRepositoryImpl
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import java.lang.IllegalArgumentException
+
+
+private val TAG: String = PersonAddViewModel::class.java.simpleName
 
 class PersonAddViewModel(private val personRepositoryImpl: PersonRepositoryImpl) : ViewModel() {
 
@@ -56,20 +58,12 @@ class PersonAddViewModel(private val personRepositoryImpl: PersonRepositoryImpl)
         personFirstName: String, personSurName: String, personAge: String, personWeight: String,
         personEyeColor: String, personHeight: String
     ): Boolean {
-
         if (personFirstName.isBlank() || personSurName.isBlank() || personAge.isBlank() ||
             personHeight.isBlank() || personWeight.isBlank() || personEyeColor.isBlank()
         ) {
             return false
         }
-        return false
-    }
-
-    fun firstNameValid(personFirstName: String): String {
-        if (personFirstName.isBlank()) {
-            return "Please Enter a First Name"
-        }
-        return personFirstName
+        return true
     }
 
 
@@ -105,17 +99,4 @@ class PersonAddViewModel(private val personRepositoryImpl: PersonRepositoryImpl)
 
 }
 
-
-/**
- * Boilerplate code for ViewModelFactory
- */
-//class PersonAddViewModelFactory(private val personRepositoryImpl: PersonRepositoryImpl) : ViewModelProvider.Factory {
-//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//        if (modelClass.isAssignableFrom(PersonAddViewModel::class.java)) {
-//            @Suppress("UNCHECKED_CAST")
-//            return PersonAddViewModel(personRepository = PersonRepositoryImpl(personDao)) as T
-//        }
-//        throw IllegalArgumentException("Unknown ViewModel Class")
-//    }
-//}
 

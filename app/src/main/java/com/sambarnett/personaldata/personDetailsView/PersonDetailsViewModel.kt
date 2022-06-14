@@ -10,8 +10,6 @@ import java.lang.IllegalArgumentException
 class PersonDetailsViewModel(private val personRepositoryImpl: PersonRepositoryImpl): ViewModel() {
 
 
-
-
     /**
      * Function is used by PersonDetailsFragment to give all the proper info for a single Person
      */
@@ -28,17 +26,4 @@ class PersonDetailsViewModel(private val personRepositoryImpl: PersonRepositoryI
         }
     }
 
-}
-
-/**
- * Boilerplate code for ViewModelFactory
- */
-class PersonDetailsViewModelFactory(private val personRepositoryImpl: PersonRepositoryImpl) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(PersonDetailsViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return PersonDetailsViewModel(personRepositoryImpl) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel Class")
-    }
 }
