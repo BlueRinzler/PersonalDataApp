@@ -7,4 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="colorPrimary">#FF3700B3</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#80D8FF</color>
+    <color name="colorWindowBackground">#121212</color>
+
+    <!-- 52 = 32%, hex to alpha -->
+    <color name="colorTransparentBlack">#52000000</color>
+    <color name="colorTransparentWhite">#52FFFFFF</color>
+
+
 </resources>

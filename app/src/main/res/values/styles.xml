@@ -7,12 +7,24 @@
         <item name="android:textAlignment">center</item>
         <item name="android:layout_height">58dp</item>
         <item name="android:textAppearance">?attr/textAppearanceBody1</item>
+
     </style>
 
     <style name="DetailsView" parent="Widget.MaterialComponents.TextView" >
         <item name="android:textSize">30dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body2</item>
+
+    </style>
+
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorWindowBackground</item>
 
     </style>
 

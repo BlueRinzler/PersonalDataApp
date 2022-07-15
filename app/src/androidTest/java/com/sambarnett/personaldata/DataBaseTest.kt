@@ -14,7 +14,6 @@ import java.io.IOException
 
 
 @RunWith(AndroidJUnit4::class)
-
 class DataBaseTest: TestCase() {
 
 

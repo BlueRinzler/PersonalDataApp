@@ -15,11 +15,11 @@ interface PersonDao {
     @Query("SELECT * FROM personInfo")
     fun observePersons() : Flow<List<Person>>
 
-    //Query to get list of people Flow
+    //Query to get list of people
     @Query("SELECT * FROM personInfo")
     suspend fun getPersons(): List<Person>
 
-    //Query to get individual people as Flow
+    //Query to get individual people
     @Query("SELECT * FROM personInfo WHERE id = :id")
     suspend fun getPersonByID(id: Int): Person?
 

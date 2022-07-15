@@ -1,10 +1,12 @@
 package com.sambarnett.personaldata.personListView
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -26,10 +28,8 @@ class PersonListFragment : Fragment() {
     private var _binding: PersonListFragmentBinding? = null
     private val binding get() = _binding!!
 
-
     //DI to create viewModel
     private val viewModel: PersonListViewModel by viewModel()
-
 
     //Need to turn on viewBinding in dependencies.
     override fun onCreateView(
@@ -57,7 +57,6 @@ class PersonListFragment : Fragment() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.allPersons().collectLatest {
@@ -65,7 +64,6 @@ class PersonListFragment : Fragment() {
                 }
             }
         }
-
         //Set up addPerson button
         binding.addPersonButton.setOnClickListener {
             val action =
@@ -73,6 +71,8 @@ class PersonListFragment : Fragment() {
             this.findNavController().navigate(action)
         }
     }
+
+
 }
 
 
