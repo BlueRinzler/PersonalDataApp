@@ -4,12 +4,7 @@ This app was inspired by codelabs on https://developer.android.com
 
 Collects user inputed data, that can be edited and deleted. 
 
-
-# TODO
-
-1.Enhance UI (use new material3).
-
-2.Implement filtering queries for Sur Name, Wieght, and Height
+[screenshot.webm](https://user-images.githubusercontent.com/51298088/184948368-a74f11c5-e4fd-4d89-9456-78c14d58de28.webm)
 
 
 
