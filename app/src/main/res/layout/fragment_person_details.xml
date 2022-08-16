@@ -8,80 +8,161 @@
     tools:context=".personDetailsView.PersonDetailsFragment">
 
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/person_first_name_id"
+        android:text="@string/first_name_up"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/first_name_up"  />
+
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/person_first_name"
         style="@style/DetailsView"
         android:layout_width="wrap_content"
-        android:layout_margin="18dp"
+        android:layout_margin="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/person_first_name_id"
         tools:text="Sam" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/person_sur_name_id"
+        android:text="@string/sur_name_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toEndOf="@+id/person_first_name_id"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/sur_name_down" />
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/person_sur_name"
         style="@style/DetailsView"
         android:layout_width="wrap_content"
-        android:layout_margin="18dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/person_first_name"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toEndOf="@+id/person_first_name"
+        app:layout_constraintTop_toBottomOf="@+id/person_sur_name_id"
         tools:text="Barnett" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/person_age_id"
+        android:text="@string/age"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/person_first_name"
+        tools:text="@string/age"  />
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/person_age"
         style="@style/DetailsView"
         android:layout_width="wrap_content"
-        android:layout_margin="18dp"
+        android:layout_margin="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/person_sur_name"
+        app:layout_constraintTop_toBottomOf="@id/person_age_id"
         tools:text="27" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/person_height_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="30dp"
+        android:text="@string/height_value"
+        app:layout_constraintStart_toEndOf="@+id/person_age"
+        app:layout_constraintTop_toBottomOf="@id/person_sur_name"
+        tools:text="@string/height_value" />
+
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/person_height"
         style="@style/DetailsView"
         android:layout_width="wrap_content"
-        android:layout_margin="18dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/person_age"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="25dp"
+        app:layout_constraintStart_toEndOf="@+id/person_age"
+        app:layout_constraintTop_toBottomOf="@+id/person_height_id"
         tools:text="177.30" />
 
-    <TextView
-        android:id="@+id/person_eye_color"
-        style="@style/DetailsView"
-        android:layout_width="wrap_content"
-        android:layout_margin="18dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/person_weight"
-        tools:text="Blue" />
 
-    <TextView
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/person_weight_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="30dp"
+        android:text="@string/weight"
+        app:layout_constraintStart_toEndOf="@+id/person_height_id"
+        app:layout_constraintTop_toBottomOf="@id/person_sur_name"
+        tools:text="@string/weight" />
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/person_weight"
         style="@style/DetailsView"
         android:layout_width="wrap_content"
-        android:layout_margin="18dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/person_height"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="35dp"
+        app:layout_constraintStart_toEndOf="@+id/person_height"
+        app:layout_constraintTop_toBottomOf="@+id/person_weight_id"
         tools:text="177" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/person_eye_color_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="50dp"
+        android:text="@string/eye_color_value"
+        app:layout_constraintStart_toEndOf="@+id/person_weight_id"
+        app:layout_constraintTop_toBottomOf="@id/person_sur_name"
+        tools:text="@string/eye_color_value" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/person_eye_color"
+        style="@style/DetailsView"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="25dp"
+        app:layout_constraintStart_toEndOf="@+id/person_weight"
+        app:layout_constraintTop_toBottomOf="@+id/person_eye_color_id"
+        tools:text="Blue" />
 
     <Button
         android:id="@+id/delete_person"
-        style="materialButtonOutlinedStyle"
-        android:layout_width="200dp"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorAccent"
+        android:drawableLeft="@drawable/ic_baseline_delete_24"
         android:text="@string/delete"
-        app:layout_constraintBottom_toTopOf="@+id/edit_person"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/person_eye_color" />
 
     <Button
         android:id="@+id/edit_person"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="200dp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorAccent"
+        android:drawableLeft="@drawable/ic_baseline_edit_24"
         android:text="@string/edit"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/delete_person" />
+        app:layout_constraintTop_toBottomOf="@+id/person_eye_color" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

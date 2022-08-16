@@ -105,7 +105,7 @@
         <!-- TextInput edit text for the eye color -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/person_eye_color_label"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:hint="@string/eye_color_value"
@@ -116,18 +116,22 @@
                 android:id="@+id/eye_color"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="textAutoComplete|textCapWords" />
+                android:inputType="textAutoComplete|textCapWords"
+                android:focusable="true"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <Button
             android:id="@+id/save_action"
-            android:drawableEnd="@drawable/person_add"
+            app:icon = "@drawable/person_add"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:backgroundTint="@color/colorAccent"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:text="@string/save_value"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/person_eye_color_label" />
 

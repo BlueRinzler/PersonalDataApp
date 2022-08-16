@@ -8,8 +8,6 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 
-
-
 /**
  * for UI State
  */
@@ -33,11 +31,7 @@ class PersonListViewModel(private val personRepositoryImpl: PersonRepositoryImpl
     fun allPersons(): Flow<List<Person>> = personRepositoryImpl.getPersonsStream()
 
     init {
-        viewModelScope.launch {
-            personRepositoryImpl.getPersonsStream().collectLatest {
-                persons -> _uiState.value = PersonListUIState.State(persons)
-            }
-        }
+        allPersons()
     }
 
 
