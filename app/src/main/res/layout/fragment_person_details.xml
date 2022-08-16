@@ -120,7 +120,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="45dp"
         android:text="@string/eye_color_value"
         app:layout_constraintStart_toEndOf="@+id/person_weight_id"
         app:layout_constraintTop_toBottomOf="@id/person_sur_name"
