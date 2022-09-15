@@ -15,16 +15,6 @@ interface PersonDao {
     @Query("SELECT * FROM personInfo")
     fun observePersons() : Flow<List<Person>>
 
-    //Query to get list of people
-    @Query("SELECT * FROM personInfo")
-    suspend fun getPersons(): List<Person>
-
-    //Query to get individual people
-    @Query("SELECT * FROM personInfo WHERE id = :id")
-    suspend fun getPersonByID(id: Int): Person?
-
-
-
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(person: Person)
 
@@ -33,11 +23,5 @@ interface PersonDao {
 
     @Delete
     suspend fun delete(person: Person)
-    /**
-     * Delete all people
-     */
-    @Query("DELETE FROM personInfo")
-    suspend fun deletePersons()
-
 
 }

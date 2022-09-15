@@ -1,14 +1,6 @@
 package com.sambarnett.personaldata.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
-import java.lang.Exception
 
 
 /**
@@ -17,28 +9,17 @@ import java.lang.Exception
 class PersonRepositoryImpl(private val personDao: PersonDao) :
     PersonRepository {
 
-    /**
-     * Below 2 functions get List and individual people from the LocalDataSource not as a flow
-     */
-    override suspend fun getPersons(): List<Person> {
-        return personDao.getPersons()
-    }
-
-    override suspend fun getPerson(id: Int): Person {
-        return personDao.getPersonByID(id)!!
-    }
 
     /**
      * Below 2 functions get List and individual from the LocalDataSource people as a flow
      */
-    override fun getPersonsStream(): Flow<List<Person>> {
+    override suspend fun getPersonsStream(): Flow<List<Person>> {
         return personDao.observePersons()
     }
 
     override fun getPersonStream(id: Int): Flow<Person> {
         return personDao.observePersonByID(id)
     }
-
 
     override suspend fun savePerson(person: Person) {
         personDao.insert(person)
@@ -69,7 +50,6 @@ class PersonRepositoryImpl(private val personDao: PersonDao) :
             personHeight = personHeight.toDouble(),
             personWeight = personWeight.toDouble(),
             personEyeColor = personEyeColor
-
         )
     }
 

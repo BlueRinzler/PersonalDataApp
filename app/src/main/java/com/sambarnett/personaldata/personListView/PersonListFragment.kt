@@ -13,7 +13,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.sambarnett.personaldata.adapter.PersonListAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.test.core.app.ActivityScenario.launch
 import com.sambarnett.personaldata.databinding.PersonListFragmentBinding
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -55,12 +57,13 @@ class PersonListFragment : Fragment() {
             this.findNavController().navigate(action)
         }
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.allPersons().collectLatest {
-                    adapter.submitList(it)
+                viewModel.uiState.collect { people ->
+                    people.let {
+                        adapter.submitList(it.people)
+                    }
                 }
             }
         }

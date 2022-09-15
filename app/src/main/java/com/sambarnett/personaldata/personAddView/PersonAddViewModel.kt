@@ -18,8 +18,6 @@ class PersonAddViewModel(private val personRepositoryImpl: PersonRepositoryImpl)
         return personRepositoryImpl.getPersonStream(id)
 
     }
-
-
     /**
      * Using the personRepository to insert a person the database via launch,private because this is called via addPerson function
      */
@@ -28,7 +26,6 @@ class PersonAddViewModel(private val personRepositoryImpl: PersonRepositoryImpl)
             personRepositoryImpl.savePerson(person)
         }
     }
-
     /**
      * Function used by AddPersonFragment to add a new person to the database, retrieves a person object from getPersonEntry
      * and uses insertPerson to inject into the database
@@ -50,7 +47,6 @@ class PersonAddViewModel(private val personRepositoryImpl: PersonRepositoryImpl)
         insertPerson(newPerson)
     }
 
-
     /**
      * Function used by AddPersonFragment via addNewPerson. To see if user input is blank, returns true or false
      */
@@ -65,7 +61,6 @@ class PersonAddViewModel(private val personRepositoryImpl: PersonRepositoryImpl)
         }
         return true
     }
-
 
     /**
      * Using the Dao to update a persons details via launch, private because updatePerson calls it

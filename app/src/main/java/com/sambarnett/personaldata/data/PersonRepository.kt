@@ -4,11 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface PersonRepository {
 
-    suspend fun getPersons(): List<Person>
-
-    suspend fun getPerson(id: Int): Person
-
-    fun getPersonsStream(): Flow<List<Person>>
+    suspend fun getPersonsStream(): Flow<List<Person>>
 
     fun getPersonStream(id: Int): Flow<Person>
 
